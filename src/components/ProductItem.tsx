@@ -1,60 +1,127 @@
 import { Link } from "react-router-dom";
 import { formatCategoryName } from "../utils/formatCategoryName";
 
-// Extend the props to include popularity and stock
-const ProductItem = ({
-  id,
-  image,
-  title,
-  category,
-  price,
-  popularity, // Added popularity
-  stock,      // Added stock
-}: {
+// Define the type for the props
+interface ProductItemProps {
   id: string;
   image: string;
   title: string;
   category: string;
   price: number;
-  popularity: number; // Added popularity type
-  stock: number;      // Added stock type
+  popularity: number;
+  stock: number;
+}
+
+const ProductItem: React.FC<ProductItemProps> = ({
+  id,
+  image,
+  title,
+  category,
+  price,
+  popularity,
+  stock,
 }) => {
   return (
-    <div className="w-[380px] flex flex-col gap-2 justify-center max-md:w-[300px]">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        gap: "10px",
+        maxWidth: "400px",
+        border: "1px solid #ddd",
+        borderRadius: "8px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        padding: "16px",
+        transition: "transform 0.3s",
+        height: "100%",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "scale(1.05)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "scale(1)";
+      }}
+    >
       <Link
         to={`/product/${id}`}
-        className="w-full h-[300px] max-md:h-[200px] overflow-hidden"
+        style={{
+          width: "100%",
+          height: "250px",
+          overflow: "hidden",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <img src={`/src/assets/${image}`} alt={title} />
+        <img
+          src={`/src/assets/${image}`}
+          alt={title}
+          style={{
+            objectFit: "contain",
+            width: "100%",
+            height: "100%",
+            transition: "transform 0.3s",
+          }}
+        />
       </Link>
+      
       <Link
         to={`/product/${id}`}
-        className="text-black text-center text-3xl tracking-[1.02px] max-md:text-2xl"
+        style={{
+          color: "black",
+          textAlign: "center",
+          fontSize: "1.25rem",
+          fontWeight: "bold",
+        }}
       >
         <h2>{title}</h2>
       </Link>
-      <p className="text-secondaryBrown text-lg tracking-wide text-center max-md:text-base">
-        {formatCategoryName(category)}{" "}
+      <p style={{ color: "#8b4513", textAlign: "center", fontSize: "1rem" }}>
+        {formatCategoryName(category)}
       </p>
-      <p className="text-black text-2xl text-center font-bold max-md:text-xl">
+      <p style={{ color: "black", textAlign: "center", fontSize: "1.5rem", fontWeight: "bold" }}>
         ${price}
       </p>
-      <p className="text-black text-lg text-center max-md:text-base">
-        Popularity: {popularity} {/* Display popularity */}
+      <p style={{ color: "black", textAlign: "center", fontSize: "0.875rem" }}>
+        Popularity: {popularity}
       </p>
-      <p className="text-black text-lg text-center max-md:text-base">
-        Stock: {stock} {/* Display stock */}
+      <p style={{ color: "black", textAlign: "center", fontSize: "0.875rem" }}>
+        Stock: {stock}
       </p>
-      <div className="w-full flex flex-col gap-1">
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
         <Link
           to={`/product/${id}`}
-          className="text-white bg-secondaryBrown text-center text-xl font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
+          style={{
+            backgroundColor: "#8b4513",
+            color: "white",
+            textAlign: "center",
+            fontSize: "1rem",
+            padding: "8px",
+            borderRadius: "4px",
+            textDecoration: "none",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           View product
         </Link>
         <Link
           to={`/product/${id}`}
-          className="bg-white text-black text-center text-xl border border-[rgba(0, 0, 0, 0.40)] font-normal tracking-[0.6px] leading-[72px] w-full h-12 flex items-center justify-center max-md:text-base"
+          style={{
+            backgroundColor: "white",
+            color: "black",
+            textAlign: "center",
+            fontSize: "1rem",
+            padding: "8px",
+            borderRadius: "4px",
+            border: "1px solid rgba(0, 0, 0, 0.4)",
+            textDecoration: "none",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           Learn more
         </Link>

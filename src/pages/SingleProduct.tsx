@@ -17,14 +17,12 @@ import toast from "react-hot-toast";
 const SingleProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [singleProduct, setSingleProduct] = useState<Product | null>(null);
-  // defining default values for input fields
   const [size, setSize] = useState<string>("xs");
   const [color, setColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
   const params = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
 
-  // defining HOC instances
   const SelectInputUpgrade = WithSelectInputWrapper(StandardSelectInput);
   const QuantityInputUpgrade = WithNumberInputWrapper(QuantityInput);
 
@@ -67,12 +65,14 @@ const SingleProduct = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-5 max-[400px]:px-3">
-      <div className="grid grid-cols-3 gap-x-8 max-lg:grid-cols-1">
-        <div className="lg:col-span-2">
+    <div className="max-w-screen-xl mx-auto px-5 max-[400px]:px-3">
+    <div className="grid grid-cols-3 gap-x-8 max-lg:grid-cols-1">
+      <div className="lg:col-span-2">
+          {/* Main Product Image with fixed size */}
           <img
             src={`/src/assets/${singleProduct?.image}`}
             alt={singleProduct?.title}
+            className="object-cover max-h-[90] w-full"
           />
         </div>
         <div className="w-full flex flex-col gap-5 mt-9">
@@ -82,7 +82,7 @@ const SingleProduct = () => {
               <p className="text-base text-secondaryBrown">
                 {formatCategoryName(singleProduct?.category || "")}
               </p>
-              <p className="text-base font-bold">${ singleProduct?.price }</p>
+              <p className="text-base font-bold">${singleProduct?.price}</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -114,7 +114,6 @@ const SingleProduct = () => {
                 setColor(() => e.target.value)
               }
             />
-
             <QuantityInputUpgrade
               value={quantity}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -129,7 +128,6 @@ const SingleProduct = () => {
             </p>
           </div>
           <div>
-            {/* drowdown items */}
             <Dropdown dropdownTitle="Description">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore
               quos deleniti, mollitia, vitae harum suscipit voluptatem quasi, ab
@@ -154,12 +152,12 @@ const SingleProduct = () => {
         </div>
       </div>
 
-      {/* similar products */}
+      {/* Similar Products */}
       <div>
         <h2 className="text-black/90 text-5xl mt-24 mb-12 text-center max-lg:text-4xl">
           Similar Products
         </h2>
-        <div className="flex flex-wrap justify-between items-center gap-y-8 mt-12 max-xl:justify-start max-xl:gap-5 ">
+        <div className="flex flex-wrap justify-between items-center gap-y-8 mt-12 max-xl:justify-start max-xl:gap-5">
           {products.slice(0, 3).map((product: Product) => (
             <ProductItem
               key={product?.id}
