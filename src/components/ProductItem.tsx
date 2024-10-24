@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
 import { formatCategoryName } from "../utils/formatCategoryName";
 
+// Extend the props to include popularity and stock
 const ProductItem = ({
   id,
   image,
   title,
   category,
   price,
+  popularity, // Added popularity
+  stock,      // Added stock
 }: {
   id: string;
   image: string;
   title: string;
   category: string;
   price: number;
+  popularity: number; // Added popularity type
+  stock: number;      // Added stock type
 }) => {
   return (
     <div className="w-[400px] flex flex-col gap-2 justify-center max-md:w-[300px]">
@@ -34,6 +39,12 @@ const ProductItem = ({
       <p className="text-black text-2xl text-center font-bold max-md:text-xl">
         ${price}
       </p>
+      <p className="text-black text-lg text-center max-md:text-base">
+        Popularity: {popularity} {/* Display popularity */}
+      </p>
+      <p className="text-black text-lg text-center max-md:text-base">
+        Stock: {stock} {/* Display stock */}
+      </p>
       <div className="w-full flex flex-col gap-1">
         <Link
           to={`/product/${id}`}
@@ -51,4 +62,5 @@ const ProductItem = ({
     </div>
   );
 };
+
 export default ProductItem;

@@ -2,6 +2,17 @@ import React from "react";
 import ProductItem from "./ProductItem";
 import { nanoid } from "nanoid";
 
+// Assuming Product type is defined somewhere
+type Product = {
+  id: string;
+  image: string;
+  title: string;
+  category: string;
+  price: number;
+  popularity: number;
+  stock: number;
+};
+
 const ProductGrid = ({ products }: { products?: Product[] }) => {
   return (
     <div
@@ -24,5 +35,5 @@ const ProductGrid = ({ products }: { products?: Product[] }) => {
     </div>
   );
 };
-// Memoize the component to prevent unnecessary re-renders because of React.cloneElement
+
 export default React.memo(ProductGrid);
