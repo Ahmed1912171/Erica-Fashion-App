@@ -1,6 +1,19 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
-const CategoryItem = ({ categoryTitle, image, link }) => (
+// Define the types for the props
+interface CategoryItemProps {
+  categoryTitle: string; // Title of the category
+  image: string;         // Image filename or URL
+  link: string;          // Path for the link
+}
+
+// Functional component with typed props
+const CategoryItem: React.FC<CategoryItemProps> = ({
+  categoryTitle,
+  image,
+  link,
+}) => (
   <div className="w-[300px] relative max-sm:w-[250px] max-sm:h-[250px]">
     <Link to={`/shop/${link}`}>
       <img src={`/src/assets/${image}`} className="h-full w-full" alt={categoryTitle} />

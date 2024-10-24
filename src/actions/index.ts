@@ -14,18 +14,20 @@ interface CheckoutFormAction {
 }
 
 export const searchAction = async ({ request }: SearchActionRequest) => {
-  // getting form data
   const formData = await request.formData();
-  // converting form data to object for easy access
   const data = Object.fromEntries(formData);
 
   return redirect(`/search?query=${data?.searchInput || ""}`);
 };
 
-
-export const checkoutAction = async ({request} : CheckoutFormAction) => {
+export const checkoutAction = async ({ request }: CheckoutFormAction) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
+  
+  // Await the response and use it
   const response = await customFetch.post("/orders", data);
-  return redirect('/');
-}
+  
+  console.log(response); // Use or log the response as needed
+  
+  return redirect('/'); // Redirect to the home page or desired location
+};
