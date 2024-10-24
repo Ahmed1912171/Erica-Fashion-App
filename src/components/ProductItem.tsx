@@ -20,7 +20,7 @@ const ProductItem = ({
   stock: number;      // Added stock type
 }) => {
   return (
-    <div className="w-[400px] flex flex-col gap-2 justify-center max-md:w-[300px]">
+    <div className="w-[380px] flex flex-col gap-2 justify-center max-md:w-[300px]">
       <Link
         to={`/product/${id}`}
         className="w-full h-[300px] max-md:h-[200px] overflow-hidden"
